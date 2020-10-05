@@ -1,0 +1,106 @@
+%section% := value
+
+setProperty :=
+    !new_array!
+    !new_array!.+fill+
+    !new_array!.+sort+
+    !new_array!.+sort+.pop()
+    !array!.concat(!array!.+sort+,!dict!)
+    !new_array!.+copyWithin+
+    !array!.+copyWithin+
+    !array!.apply(null,Array(+copy_start_param+)).map(+copy_start_param+.valueOf,+copy_start_param+)
+    !new_array!.apply(null,Array(+copy_start_param+)).map(+copy_start_param+.valueOf,+copy_start_param+)
+    !new_array!.slice( !new_array!.length, +common:intoverflow+  );
+    !new_array!.slice( %range%(0-32767), +common:intoverflow+  );
+    !array!.slice( !array!.length, +common:intoverflow+  );
+    !array!.slice( %range%(0-32767), +common:intoverflow+  );
+    !new_array!.slice( !new_array!.length, +common:intoverflow+  );
+    !new_array!.slice( %range%(0-32767), +common:intoverflow+  );
+    !array!.concat(!array!,!dict!)
+    !array!.slice( !array!.length, +common:intoverflow+  );
+
+
+stuff :=
+    +common:text+
+    +common:asciichar+
+    +common:length+
+
+
+wrapper :=
+    try { +setProperty+ } catch (e) {} \n
+
+
+copyWithin :=
+    copyWithin(!new_array!,+copy_start_param+)
+    copyWithin(!array!,+copy_start_param+,+copy_start_param+)
+
+fill :=
+    fill(+copy_start_param+,+copy_start_param+,+copy_start_param+);
+    fill(+copy_start_param+,+copy_start_param+,!array!.length -1)
+    fill(+copy_start_param+,+copy_start_param+,!array!.length +1)
+    fill(+copy_start_param+,+copy_start_param+,!new_array!.length -1)
+    fill(+copy_start_param+,+copy_start_param+,!new_array!.length +1)
+
+
+copy_start_param :=
+    +number+
+    +common:number+
+    +common:int+
+    +common:bad_number+
+    +common:positive_integer+
+
+
+sort :=
+    sort()
+    sort(+TwoArgNumericCmp+)
+
+
+TwoArgNumericCmp :=
+    function(a,b){if(a > b){return a}else{return b}}
+
+a :=
+    +common:number+
+
+b :=
+    +common:number+
+
+number :=
+   +common:intoverflow+ 
+
+%section% := variable
+
+
+array :=
+	var @array@ = []; 
+
+
+
+dict :=
+    var @dict@ = {}; 
+
+ 
+
+
+new_array  :=
+    var @new_array@ = new Array(!array!)
+    var @new_array@ = new Array(!dict!)
+    var @new_array@ = new Array()
+    var @new_array@ = new Array(!array!.length)
+
+
+
+        
+property :=
+    var @property@ = "+common:character+"
+
+%section% := variance
+
+main :=
+    Object.defineProperty(!dict!,!property!,{value: +number+});
+    Object.defineProperty(!array!,!property!,{value: +number+});
+    Object.defineProperty(!dict!,!property!,{value: +number+});
+    Object.defineProperty(!array!,!property!,{value: +number+});
+    +wrapper+
+    +wrapper+
+    +wrapper+
+    +wrapper+
